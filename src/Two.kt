@@ -1,7 +1,5 @@
 package aoc
 
-import java.io.File
-
 sealed class SubCommand(val value: Int)
 class UpCommand(value: Int) : SubCommand(value)
 class DownCommand(value: Int) : SubCommand(value)
@@ -34,10 +32,9 @@ data class SubCoord(val depth: Int, val reach: Int, val aim: Int = 0) {
     }
 }
 
-
 object Two : Day(2) {
     override fun a(): String {
-        val commands = File("inputs/input2.txt").readLines().map(::parseSubCommand)
+        val commands = puzzleInput.map(::parseSubCommand)
         val subCoords = commands.map { SubCoord(it) }
         val result = subCoords.reduce { acc, coord ->
             acc + coord
@@ -46,7 +43,7 @@ object Two : Day(2) {
     }
 
     override fun b(): String {
-        val commands = File("inputs/input2.txt").readLines().map(::parseSubCommand)
+        val commands = puzzleInput.map(::parseSubCommand)
         val result = commands.fold(SubCoord(0, 0)) { acc, subCommand ->
             acc.applyCommand(subCommand)
         }

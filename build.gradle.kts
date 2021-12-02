@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.0"
     application
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 val aocMainClass = "aoc.MainKt"
@@ -13,7 +14,7 @@ application {
 }
 
 kotlin.sourceSets {
-        main { kotlin.srcDir("src") }
+    main { kotlin.srcDir("src") }
 }
 
 repositories {

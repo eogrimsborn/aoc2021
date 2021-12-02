@@ -9,7 +9,7 @@ fun main() {
     allDays
         .flatMap {
             listOf(
-                measureTimedValue{ it.a() },
+                measureTimedValue { it.a() },
                 measureTimedValue { it.b() }
             )
         }
