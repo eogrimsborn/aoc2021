@@ -7,7 +7,7 @@ object Four : Day(4) {
 
     class BingoException(val board: BingoBoard, val drawNumber: Int) : Exception()
     class BingoBoard(data: List<String>) {
-        var bingoCache: Boolean? = null
+        private var bingoCache: Boolean? = null
         private val coordsByCoord: Map<Pair<Int, Int>, BingoCoord> = buildMap {
             data.forEachIndexed { row, rowData ->
                 rowData.trim().split(Regex("""\s+""")).forEachIndexed { column, valueString ->
@@ -19,20 +19,24 @@ object Four : Day(4) {
         private val coordsByValue: Map<Int, BingoCoord> = coordsByCoord.values.associateBy { it.value }
         private val rows: List<List<BingoCoord>> = buildList {
             for (row in 0 until 5) {
-                add(buildList {
-                    for (col in 0 until 5) {
-                        add(coordsByCoord[row to col]!!)
+                add(
+                    buildList {
+                        for (col in 0 until 5) {
+                            add(coordsByCoord[row to col]!!)
+                        }
                     }
-                })
+                )
             }
         }
         private val cols: List<List<BingoCoord>> = buildList {
             for (col in 0 until 5) {
-                add(buildList {
-                    for (row in 0 until 5) {
-                        add(coordsByCoord[row to col]!!)
+                add(
+                    buildList {
+                        for (row in 0 until 5) {
+                            add(coordsByCoord[row to col]!!)
+                        }
                     }
-                })
+                )
             }
         }
 
@@ -45,13 +49,6 @@ object Four : Day(4) {
                 coordsByValue[number]?.drawn = true
                 bingoCache = null
                 if (hasBingo()) throw BingoException(this, number)
-            }
-        }
-
-        fun drawNumberNoThrow(number: Int) {
-            if (number in coordsByValue) {
-                coordsByValue[number]?.drawn = true
-                bingoCache = null
             }
         }
 
@@ -104,9 +101,8 @@ object Four : Day(4) {
                     if (!board.hasBingo()) {
                         try {
                             board.drawNumber(drawNumber)
-                        }
-                        catch (e: BingoException){
-                            if(bingoBoards.all { it.hasBingo() }){
+                        } catch (e: BingoException) {
+                            if (bingoBoards.all { it.hasBingo() }) {
                                 throw e
                             }
                         }
