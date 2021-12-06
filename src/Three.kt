@@ -36,7 +36,7 @@ object Three : Day(3) {
         for (i in 0..width) {
             if (oxygenCodes.size == 1) break
             val (zeros, ones) = countBits(oxygenCodes, i)
-            val x = when {
+            when {
                 zeros > ones -> oxygenCodes.retainAll { it[i] == '0' }
                 zeros < ones -> oxygenCodes.retainAll { it[i] == '1' }
                 else -> oxygenCodes.retainAll { it[i] == '1' }
@@ -46,7 +46,7 @@ object Three : Day(3) {
         for (i in 0..width) {
             if (co2Codes.size == 1) break
             val (zeros, ones) = countBits(co2Codes, i)
-            val x = when {
+            when {
                 zeros > ones -> co2Codes.retainAll { it[i] == '1' }
                 zeros < ones -> co2Codes.retainAll { it[i] == '0' }
                 else -> co2Codes.retainAll { it[i] == '0' }
