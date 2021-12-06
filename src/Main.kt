@@ -9,8 +9,8 @@ fun main() {
     allDays
         .flatMap {
             listOf(
-                measureTimedValue { it.a() },
-                measureTimedValue { it.b() }
+                measureTimedValue { "Day ${it.day}a: ${it.a()}" },
+                measureTimedValue { "Day ${it.day}b: ${it.b()}" },
             )
         }
         .forEach {
