@@ -12,4 +12,4 @@ val allDays = Day::class.sealedSubclasses
     .mapNotNull { it.objectInstance }
     .sortedBy { it.day }
 
-val unused = " " // Let's see if we can trigure a workflow
+val unused = "" // Let's see if we can trigure a workflow
